@@ -41,7 +41,7 @@ $('.friendz-list > li, .chat-users > li').on('click', function() {
 	  });
 	
 /*--- emojies show on text area ---*/	
-	$('.add-smiles > span').on("click", function() {
+	$(document).on("click",".add-smiles > span",function() {
 	    $(this).parent().siblings(".smiles-bunch").toggleClass("active");
 	  });
 

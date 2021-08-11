@@ -117,6 +117,8 @@ class Controller extends  Database{
 			$this->db->query("INSERT INTO `status` (user_id, text) VALUES('$user_id','$status')");
 	    header("location:profile.php");
 
+		} else {
+		    header("location:profile.php");
 		}
 	}
 
@@ -204,6 +206,19 @@ function this_status_dislike(){
 		$status_id=$_POST["status_id"];
 		$data=$this->db->query("SELECT * FROM status_com join `user` ON user.id=status_com.user_id  WHERE status_id='$status_id' ")->fetch_all(true);
 		print json_encode($data);
+	}
+
+	function add_com(){
+		$status_id=$_POST["status_id"];
+		$com_text=$_POST["com_text"];
+		$user_id=$_SESSION["user"]["id"];
+		var_dump($com_text);
+		if (!empty($com_text)) {
+			$this->db->query("INSERT INTO `status_com` (status_id,user_id, comment) VALUES('$status_id','$user_id', '$com_text')");
+	    header("location:profile.php");
+		} else {
+		    header("location:profile.php");
+		}
 	}
 
 }
