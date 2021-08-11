@@ -852,6 +852,8 @@ $(document).on("click",".this_status_com",function() {
 																<textarea placeholder="Post your comment"></textarea>
 																<div class="add-smiles">
 																	<span class="em em-expressionless" title="add icon"></span>
+																	<span><i class="fa fa-paper-plane"></i></span>
+
 																</div>
 																<div class="smiles-bunch">
 																	<i class="em em---1"></i>
