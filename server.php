@@ -220,7 +220,12 @@ function this_status_dislike(){
 		    header("location:profile.php");
 		}
 	}
-
+    function this_status_delete(){
+		$status_id=$_POST["status_id"];
+		$data=$this->db->query("DELETE FROM `STATUS`
+                                WHERE status_id='$status_id' ")->fetch_all(true);
+		print json_encode($data);
+	}
 }
 
 

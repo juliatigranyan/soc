@@ -367,6 +367,11 @@
 																
 																 <i style="    font-size: 19px;" class="text-dark fa fa-edit"></i>
 																 
+																<li status_id="${r[i]["id"]}" class="this_status_delete">
+																<span class="delete" data-toggle="tooltip" title="Delete">
+																	<i style="    font-size: 21px;" class="fa fa-trash"></i>
+																</span>
+															</li>
 																</div>
 															</li>
 														</ul>
@@ -415,6 +420,19 @@
   			 $(this).find("ins").text(r[0][0]["like_count"])
   			 console.log( r[1][0]["like_count"])
   			 $(this).parent().find(".dislike").find("ins").text(r[1][0]["dislike_count"])
+  			}
+
+ 		})
+
+	});
+	$(document).on("click",".this_status_delete",function() {
+		var status_id=$(this).attr("status_id")
+		$.ajax({
+  			url:'server.php',
+  			type:'post',
+  			data:{action:'this_status_delete',status_id:status_id},
+  			success:(r)=>{
+  			 r=JSON.parse(r)
   			}
 
  		})
