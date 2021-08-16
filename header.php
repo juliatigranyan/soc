@@ -386,11 +386,12 @@
           <span>1205 followers</span>
           <!-- <a href="#" title="" data-ripple="">Add Friend</a> -->
         </div>
-        <form class="edit-phto">
+        <form class="edit-phto" enctype='multipart/form-data' action="server" method="post">
+          <input type="hidden" name="action" value="edit_prof_pick">
           <i class="fa fa-camera-retro"></i>
           <label class="fileContainer">
             Edit Cover Photo
-          <input type="file"/>
+          <input name="new_prof_pick" type="file"/>
           </label>
         </form>
         <div class="container-fluid">

@@ -1,6 +1,32 @@
 <?php 
 	include_once("header.php");
  ?>
+ <div class="p-3 modal" style="position: fixed; width: 30%; top: 0; left: 0; right: 0; bottom: 0; margin: auto; background: #f7d9ff; z-index: 999; height: 80%; display: none;">
+ 	<h4 class="close_modal" style="margin-left:95%">x</h4>
+ 	<form method="post" action="server.php">
+	<input type="hidden" name="action" value="edit_status">
+	<input type="hidden" class="status_id" name="status_id">
+	<textarea name="new_text"  class="h-50 mt-5 form-control new_text" name="" id="" ></textarea>
+	<div class="add-smiles" style="top: 31%; right: 5%;">
+	<span>	&#128513;</span>
+	</div>
+	<div class="smiles-bunch" style="top: 81px; right: 3%;">
+		<span class="status_smile_edit">&#128525;</span>
+			<span class="status_smile_edit">&#128512;</span>
+		<span class="status_smile_edit">&#128514;</span>
+		<span class="status_smile_edit">&#128515;</span>
+		<span class="status_smile_edit">&#128520;</span>
+		<span class="status_smile_edit">&#128523;</span>
+		<span class="status_smile_edit">&#128526;</span>
+		<span class="status_smile_edit">&#128536;</span>
+		<span class="status_smile_edit">&#128549;</span>
+		<span class="status_smile_edit">&#128552;</span>
+		<span class="status_smile_edit">&#128557;</span>
+		<span class="status_smile_edit">&#129298;</span>
+	</div>
+ 	<button class="mt-3"  style="cursor:pointer;margin-left:89%; background:#c51def;">Save</button>
+ </form>
+ </div>
 
 	<section>
 		<div class="gap gray-bg mt-3">
@@ -306,6 +332,11 @@
 		var old_text=$(".status_text").val()
 		$(".status_text").val(old_text+smile)
 	})	
+	$(document).on("click",".status_smile_edit",function() {
+		var smile=$(this).text()
+		var old_text=$(".new_text").val()
+		$(".new_text").val(old_text+smile)
+	})	
 	$(document).on("click",".com_smile",function() {
 		var smile=$(this).text()
 		var old_text=$(".com_text").val()
@@ -363,9 +394,9 @@
 																	<ins>${r[i][1]}</ins>
 																</span>
 															</li>
-															<li>
+															<li status_text="${r[i]["text"]}" status_id="${r[i]["id"]}" class="edit_status">
 																
-																 <i style="    font-size: 19px;" class="text-dark fa fa-edit"></i>
+																 <i  style="font-size: 19px;" class="text-dark fa fa-edit"></i>
 																 
 																<li status_id="${r[i]["id"]}" class="this_status_delete">
 																<span class="delete" data-toggle="tooltip" title="Delete">
@@ -432,12 +463,26 @@
   			type:'post',
   			data:{action:'this_status_delete',status_id:status_id},
   			success:(r)=>{
-  			 r=JSON.parse(r)
+  			 $(this).parent().parent().parent().parent().parent().remove()
   			}
 
  		})
 
+	});	
+
+	$(document).on("click",".edit_status",function() {
+		var status_id=$(this).attr("status_id")
+		var status_text=$(this).attr("status_text")
+		$(".modal").find("textarea").val(status_text)
+		$(".modal").find(".status_id").val(status_id)
+		$(".modal").show()
+
 	});
+
+$(document).on("click",".close_modal",function() {
+		$(".modal").hide()
+});
+	
 
 $(document).on("click",".this_status_com",function() {
 		var status_id=$(this).attr("status_id")

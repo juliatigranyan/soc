@@ -222,9 +222,16 @@ function this_status_dislike(){
 	}
     function this_status_delete(){
 		$status_id=$_POST["status_id"];
-		$data=$this->db->query("DELETE FROM `STATUS`
-                                WHERE status_id='$status_id' ")->fetch_all(true);
-		print json_encode($data);
+		$this->db->query("DELETE FROM `status` WHERE id='$status_id' ");
+		print json_encode("aaa");
+	}
+	function edit_status(){
+		$text=$_POST["new_text"];
+		$status_id=$_POST["status_id"];
+		$this->db->query("UPDATE status SET `text` = '$text' WHERE id='$status_id'");
+		header("location:profile.php");
+
+
 	}
 }
 
